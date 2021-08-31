@@ -162,65 +162,65 @@ fs2020_variable_subscribe("LIGHT LOGO ON", "Bool", new_logo_pos)
 function belt_click_callback(position)
     if position == 0 then
         switch_set_position(belt_id, 1)
-        --INOP
         --fs2020_event("CABIN_SEATBELTS_ALERT_SWITCH_TOGGLE")
+        fs2020_event("Mobiflight.WT_CJ4_SEATBELT_LIGHT_TOGGLE")
     elseif position == 1 then
         switch_set_position(belt_id, 0)
-        --INOP
         --fs2020_event("CABIN_SEATBELTS_ALERT_SWITCH_TOGGLE")
+        fs2020_event("Mobiflight.WT_CJ4_SEATBELT_LIGHT_TOGGLE")
      end
     sound_play(fail_snd)
 end
 
-belt_id = switch_add("belt_off.png", "belt_off.png", 434, 227, 65, 50, belt_click_callback)
+belt_id = switch_add("belt_off.png", "belt_on.png", 434, 227, 65, 50, belt_click_callback)
 
 function new_belt_pos(sw_on)
-    if sw_on == 0 then
+    if sw_on == false then
         switch_set_position(belt_id, 0)
-    elseif  sw_on == 1 then
+    elseif  sw_on == true then
         switch_set_position(belt_id, 1)
     end
 end    
-fs2020_variable_subscribe("CABIN SEATBELTS ALERT SWITCH", "Bool", new_belt_pos)
+fs2020_variable_subscribe("SEATBELT_LIGHT_ON", "Bool", new_belt_pos)
 -- END BELT LIGHT
 
 -- SAFETY LIGHT
 function safety_click_callback(position)
     if position == 0 then
         switch_set_position(safety_id, 1)
-        --INOP
+        fs2020_event("Mobiflight.WT_CJ4_SAFETY_LIGHT_TOGGLE")
     elseif position == 1 then
         switch_set_position(safety_id, 0)
-        --INOP   
+        fs2020_event("Mobiflight.WT_CJ4_SAFETY_LIGHT_TOGGLE")
     end
     sound_play(fail_snd)
 end
 
-safety_id = switch_add("safety_off.png", "safety_off.png", 531, 227, 65, 50, safety_click_callback)
+safety_id = switch_add("safety_off.png", "safety_on.png", 531, 227, 65, 50, safety_click_callback)
 
 function new_safety_pos(sw_on)
-    if sw_on == 0 then
+    if sw_on == false then
         switch_set_position(safety_id, 0)
-    elseif  sw_on == 1 then
+    elseif  sw_on == true then
         switch_set_position(safety_id, 1)
     end
 end    
---fs2020_variable_subscribe("CABIN SEATBELTS ALERT SWITCH", "Bool", new_safety_pos)
+fs2020_variable_subscribe("SAFETY_LIGHT_ON", "Bool", new_safety_pos)
 -- END SAFETY LIGHT
 
 -- TCAS 
 function tcas_click_callback(position)
     if position == 0 then
         switch_set_position(tcas_id, 1)
-        --INOP
+        fs2020_event("PULSE_LIGHTS_TOGGLE")
     elseif position == 1 then
         switch_set_position(tcas_id, 0)
-        --INOP
+        fs2020_event("PULSE_LIGHTS_TOGGLE")
     end
     sound_play(fail_snd)
 end
 
-tcas_id = switch_add("tcas_off.png", "tcas_off.png", 433, 306, 65, 50, tcas_click_callback)
+tcas_id = switch_add("tcas_on.png", "tcas_off.png", 433, 306, 65, 50, tcas_click_callback)
 
 function new_tcas_pos(sw_on)
     if sw_on == 0 then
@@ -229,7 +229,6 @@ function new_tcas_pos(sw_on)
         switch_set_position(tcas_id, 1)
     end
 end    
---fs2020_variable_subscribe("CABIN SEATBELTS ALERT SWITCH", "Bool", new_tcas_pos)
 -- END TCAS
 
 -- ON SWITCH
